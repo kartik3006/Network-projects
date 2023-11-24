@@ -1,0 +1,55 @@
+Dhcp config In R:
+Router(config)#ser
+Router(config)#service dh
+Router(config)#service dhcp 
+Router(config)#ip dh
+Router(config)#ip dhcp po
+Router(config)#ip dhcp pool Admin-pool
+Router(dhcp-config)#net
+Router(dhcp-config)#network 192.168.1.0 255.255.255.192
+Router(dhcp-config)#de
+Router(dhcp-config)#default-router 192.168.1.1
+Router(dhcp-config)#dns
+Router(dhcp-config)#dns-server 192.168.1.1
+Router(dhcp-config)#do
+Router(dhcp-config)#domain-name admin.com
+Router(dhcp-config)#ex
+Router(config)#ip dh
+Router(config)#ip dhcp po
+Router(config)#ip dhcp pool Hrteam-pool
+Router(dhcp-config)#net 192.168.1.64 255.255.255.192
+Router(dhcp-config)#de
+Router(dhcp-config)#default-router 192.168.1.65
+Router(dhcp-config)#dns
+Router(dhcp-config)#dns-server 192.168.1.65
+Router(dhcp-config)#do
+Router(dhcp-config)#domain-name hrteam.com
+Router(dhcp-config)#ex
+Router(config)#ip dh
+Router(config)#ip dhcp po
+Router(config)#ip dhcp pool accounts-pool
+Router(dhcp-config)#net 192.168.1.128 255.255.255.192
+Router(dhcp-config)#de
+Router(dhcp-config)#default-router 192.168.1.129
+Router(dhcp-config)#dns
+Router(dhcp-config)#dns-server 192.168.1.129
+Router(dhcp-config)#do
+Router(dhcp-config)#domain-name accounts.com
+Router(dhcp-config)#ex
+Router(config)#ip dh
+Router(config)#ip dhcp 
+Router(config)#ip dhcp po
+Router(config)#ip dhcp pool it-pool
+Router(dhcp-config)#net
+Router(dhcp-config)#network 192.168.1.192 255.255.255.192
+Router(dhcp-config)#de
+Router(dhcp-config)#default-router 192.168.1.193
+Router(dhcp-config)#dns
+Router(dhcp-config)#dns-server 192.168.1.193
+Router(dhcp-config)#do
+Router(dhcp-config)#domain-name it.com
+Router(dhcp-config)#do wr
+Router(dhcp-config)#ex
+Router(config)#^Z
+Router#
+%SYS-5-CONFIG_I: Configured from console by console
