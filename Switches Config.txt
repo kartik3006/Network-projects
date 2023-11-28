@@ -1,0 +1,146 @@
+Switches:
+S1
+Switch>
+Switch>
+Switch>
+Switch>en
+Switch#config t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Switch(config)#hos
+Switch(config)#hostname SW1
+SW1(config)#vlan 10
+SW1(config-vlan)#na
+SW1(config-vlan)#name Vlan10
+SW1(config-vlan)#ex
+SW1(config)#int
+SW1(config)#interface fa
+SW1(config)#interface fastEthernet 0/1
+SW1(config-if)#sw
+SW1(config-if)#switchport mo
+SW1(config-if)#switchport mode ac
+SW1(config-if)#switchport mode access 
+SW1(config-if)#sw
+SW1(config-if)#switchport ac
+SW1(config-if)#switchport access vlan 10
+SW1(config-if)#ex
+SW1(config)#int ra
+SW1(config)#int range fa
+SW1(config)#int range fastEthernet 0/2-20
+SW1(config-if-range)#sw
+SW1(config-if-range)#switchport mo
+SW1(config-if-range)#switchport mode ac
+SW1(config-if-range)#switchport mode access 
+SW1(config-if-range)#sw
+SW1(config-if-range)#switchport ac
+SW1(config-if-range)#switchport access vlan 10
+SW1(config-if-range)#ex
+SW1(config)#int
+SW1(config)#interface ra
+SW1(config)#interface range fa
+SW1(config)#interface range fastEthernet 0/21-24
+SW1(config-if-range)#sw
+SW1(config-if-range)#switchport mo
+SW1(config-if-range)#switchport mode tr
+SW1(config-if-range)#switchport mode trunk 
+SW1(config-if-range)#ex
+SW1(config)#do wr
+Building configuration...
+[OK]
+SW1(config)#ex
+SW1#
+%SYS-5-CONFIG_I: Configured from console by console
+
+S2
+Switch>
+Switch>en
+Switch#config t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Switch(config)#ho
+Switch(config)#hostname SW2
+SW2(config)#vlan 20
+SW2(config-vlan)#na
+SW2(config-vlan)#name Vlan20
+SW2(config-vlan)#ex
+SW2(config)#int
+SW2(config)#interface ra
+SW2(config)#interface range fa
+SW2(config)#interface range fastEthernet 0/1-20
+SW2(config-if-range)#sw
+SW2(config-if-range)#switchport mo
+SW2(config-if-range)#switchport mode ac
+SW2(config-if-range)#switchport mode access 
+SW2(config-if-range)#sw
+SW2(config-if-range)#switchport ac
+SW2(config-if-range)#switchport access vlan 20
+SW2(config-if-range)#ex
+SW2(config)#int ra
+SW2(config)#int range fa
+SW2(config)#int range fastEthernet 0/21-24
+SW2(config-if-range)#sw
+SW2(config-if-range)#switchport mo
+SW2(config-if-range)#switchport mode tr
+SW2(config-if-range)#switchport mode trunk 
+SW2(config-if-range)#ex
+SW2(config)#do wr
+Building configuration...
+[OK]
+SW2(config)#ex
+SW2#
+%SYS-5-CONFIG_I: Configured from console by console
+
+S3
+Switch>
+Switch>
+Switch>en
+Switch#config t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Switch(config)#vlan 10
+Switch(config-vlan)#name Vlan10
+Switch(config-vlan)#ex
+Switch(config)#vlan 20
+Switch(config-vlan)#name vlan20
+Switch(config-vlan)#ex
+Switch(config)#int
+Switch(config)#interface ra
+Switch(config)#interface range fa
+Switch(config)#interface range fastEthernet 0/21-24
+Switch(config-if-range)#sw
+Switch(config-if-range)#switchport mo
+Switch(config-if-range)#switchport mode tr
+Switch(config-if-range)#switchport mode trunk 
+Switch(config-if-range)#ex
+Switch(config)#int
+Switch(config)#interface gig
+Switch(config)#interface gigabitEthernet 0/1
+Switch(config-if)#sw
+Switch(config-if)#switchport mo
+Switch(config-if)#switchport mode tr
+Switch(config-if)#switchport mode trunk 
+Switch(config-if)#ex
+Switch(config)#do wr
+Building configuration...
+[OK]
+Switch(config)#ex
+Switch#
+%SYS-5-CONFIG_I: Configured from console by console
+
+Switch#en 
+Switch#config t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Switch(config)#host
+Switch(config)#hostname sW3
+sW3(config)#ex
+sW3#
+%SYS-5-CONFIG_I: Configured from console by console
+
+sW3#config t
+Enter configuration commands, one per line.  End with CNTL/Z.
+sW3(config)#Int 
+sW3(config)#Int gig
+sW3(config)#Int gigabitEthernet 0/1
+sW3(config-if)#sw
+sW3(config-if)#switchport mo
+sW3(config-if)#switchport mode tr
+sW3(config-if)#switchport mode trunk 
+sW3(config-if)#ex
+sW3(config)#

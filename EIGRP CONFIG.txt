@@ -1,0 +1,292 @@
+EIGRP CONFIG:
+R1
+R1>en
+R1#config t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R1(config)#ro
+R1(config)#router ei
+R1(config)#router eigrp 100
+R1(config-router)#net
+R1(config-router)#network 192.168.1.0 0.0.0.255
+R1(config-router)#net 192.168.4.0 0.0.0.255
+R1(config-router)#net 192.168.10.0 0.0.0.255
+R1(config-router)#net 192.168.20.0 0.0.0.255
+R1(config-router)#ex
+R1(config)#show ip ei
+R1(config)#ex
+R1#
+%SYS-5-CONFIG_I: Configured from console by console
+
+R1#sh
+R1#show ip 
+R1#show ip ei
+R1#show ip eigrp to
+R1#show ip eigrp topology all
+R1#show ip eigrp topology all-links 
+IP-EIGRP Topology Table for AS 100/ID(192.168.20.1)
+
+Codes: P - Passive, A - Active, U - Update, Q - Query, R - Reply,
+       r - Reply status
+
+P 192.168.1.0/24, 1 successors, FD is 2169856
+         via Connected, Serial0/0/0
+P 192.168.4.0/24, 1 successors, FD is 2169856
+         via Connected, Serial0/0/1
+P 192.168.10.0/24, 1 successors, FD is 28160
+         via Connected, GigabitEthernet0/0.10
+P 192.168.20.0/24, 1 successors, FD is 28160
+         via Connected, GigabitEthernet0/0.20
+R1#
+R1#sho
+R1#show ip ro
+R1#show ip route 
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP
+       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area
+       * - candidate default, U - per-user static route, o - ODR
+       P - periodic downloaded static route
+
+Gateway of last resort is not set
+
+     192.168.1.0/24 is variably subnetted, 2 subnets, 2 masks
+C       192.168.1.0/24 is directly connected, Serial0/0/0
+L       192.168.1.1/32 is directly connected, Serial0/0/0
+     192.168.4.0/24 is variably subnetted, 2 subnets, 2 masks
+C       192.168.4.0/24 is directly connected, Serial0/0/1
+L       192.168.4.2/32 is directly connected, Serial0/0/1
+     192.168.10.0/24 is variably subnetted, 2 subnets, 2 masks
+C       192.168.10.0/24 is directly connected, GigabitEthernet0/0.10
+L       192.168.10.1/32 is directly connected, GigabitEthernet0/0.10
+     192.168.20.0/24 is variably subnetted, 2 subnets, 2 masks
+C       192.168.20.0/24 is directly connected, GigabitEthernet0/0.20
+L       192.168.20.1/32 is directly connected, GigabitEthernet0/0.20
+
+R1#
+
+
+R2:
+R2>en
+R2#config t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R2(config)#ro
+R2(config)#router ei
+R2(config)#router eigrp 100
+R2(config-router)#net 192.168.1.0 0.0.0.255
+R2(config-router)#
+%DUAL-5-NBRCHANGE: IP-EIGRP 100: Neighbor 192.168.1.1 (Serial0/0/0) is up: new adjacency
+
+R2(config-router)#net 192.168.2.0 0.0.0.255
+R2(config-router)#net 192.168.30.0 0.0.0.255
+R2(config-router)#ex
+R2(config)#show ip ro
+R2(config)#show ip route eigrp
+            ^
+% Invalid input detected at '^' marker.
+	
+R2(config)#ex
+R2#
+%SYS-5-CONFIG_I: Configured from console by console
+
+R2#show ip ro
+R2#show ip route ei
+R2#show ip route eigrp 
+     192.168.2.0/24 is variably subnetted, 2 subnets, 2 masks
+D    192.168.4.0/24 [90/2681856] via 192.168.1.1, 00:00:59, Serial0/0/0
+D    192.168.10.0/24 [90/2172416] via 192.168.1.1, 00:00:59, Serial0/0/0
+D    192.168.20.0/24 [90/2172416] via 192.168.1.1, 00:00:59, Serial0/0/0
+
+R2#show ip ei
+R2#show ip eigrp to
+R2#show ip eigrp topology all
+R2#show ip eigrp topology all-links 
+IP-EIGRP Topology Table for AS 100/ID(192.168.30.1)
+
+Codes: P - Passive, A - Active, U - Update, Q - Query, R - Reply,
+       r - Reply status
+
+P 192.168.1.0/24, 1 successors, FD is 2169856
+         via Connected, Serial0/0/0
+P 192.168.2.0/24, 1 successors, FD is 2169856
+         via Connected, Serial0/0/1
+P 192.168.4.0/24, 1 successors, FD is 2681856
+         via 192.168.1.1 (2681856/2169856), Serial0/0/0
+P 192.168.10.0/24, 1 successors, FD is 2172416
+         via 192.168.1.1 (2172416/28160), Serial0/0/0
+P 192.168.20.0/24, 1 successors, FD is 2172416
+         via 192.168.1.1 (2172416/28160), Serial0/0/0
+P 192.168.30.0/24, 1 successors, FD is 2816
+         via Connected, GigabitEthernet0/0
+R2#
+R2#
+R2#show ip ro
+R2#show ip route ei
+R2#show ip route eigrp ne
+R2#show ip route eigrp ni
+R2#show ip eigrp ne
+R2#show ip eigrp neighbors 
+IP-EIGRP neighbors for process 100
+H   Address         Interface      Hold Uptime    SRTT   RTO   Q   Seq
+                                   (sec)          (ms)        Cnt  Num
+0   192.168.1.1     Se0/0/0        13   00:01:35  40     1000  0   5
+
+R2#
+R2#
+R2#
+
+
+R3:
+R3>en
+R3#config t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R3(config)#ro
+R3(config)#router ei
+R3(config)#router eigrp 100
+R3(config-router)#net 192.168.2.0 0.0.0.255
+R3(config-router)#
+%DUAL-5-NBRCHANGE: IP-EIGRP 100: Neighbor 192.168.2.1 (Serial0/0/0) is up: new adjacency
+
+R3(config-router)#net 192.168.3.0 0.0.0.255
+R3(config-router)#net 192.168.40.0 0.0.0.255
+R3(config-router)#ex
+R3(config)#ex
+R3#
+%SYS-5-CONFIG_I: Configured from console by console
+
+R3#show ip ro
+R3#show ip route ei
+R3#show ip route eigrp 
+D    192.168.1.0/24 [90/2681856] via 192.168.2.1, 00:00:35, Serial0/0/0
+     192.168.3.0/24 is variably subnetted, 2 subnets, 2 masks
+D    192.168.4.0/24 [90/3193856] via 192.168.2.1, 00:00:35, Serial0/0/0
+D    192.168.10.0/24 [90/2684416] via 192.168.2.1, 00:00:35, Serial0/0/0
+D    192.168.20.0/24 [90/2684416] via 192.168.2.1, 00:00:35, Serial0/0/0
+D    192.168.30.0/24 [90/2170112] via 192.168.2.1, 00:00:35, Serial0/0/0
+
+R3#
+R3#
+R3#show ip ei
+R3#show ip eigrp ne
+R3#show ip eigrp neighbors 
+IP-EIGRP neighbors for process 100
+H   Address         Interface      Hold Uptime    SRTT   RTO   Q   Seq
+                                   (sec)          (ms)        Cnt  Num
+0   192.168.2.1     Se0/0/0        13   00:00:42  40     1000  0   16
+
+R3#
+R3#
+R3#
+R3#show ip ei
+R3#show ip eigrp to
+R3#show ip eigrp topology al
+R3#show ip eigrp topology all-links 
+IP-EIGRP Topology Table for AS 100/ID(192.168.40.1)
+
+Codes: P - Passive, A - Active, U - Update, Q - Query, R - Reply,
+       r - Reply status
+
+P 192.168.1.0/24, 1 successors, FD is 2681856
+         via 192.168.2.1 (2681856/2169856), Serial0/0/0
+P 192.168.2.0/24, 1 successors, FD is 2169856
+         via Connected, Serial0/0/0
+P 192.168.3.0/24, 1 successors, FD is 2169856
+         via Connected, Serial0/0/1
+P 192.168.4.0/24, 1 successors, FD is 3193856
+         via 192.168.2.1 (3193856/2681856), Serial0/0/0
+P 192.168.10.0/24, 1 successors, FD is 2684416
+         via 192.168.2.1 (2684416/2172416), Serial0/0/0
+P 192.168.20.0/24, 1 successors, FD is 2684416
+         via 192.168.2.1 (2684416/2172416), Serial0/0/0
+P 192.168.30.0/24, 1 successors, FD is 2170112
+         via 192.168.2.1 (2170112/2816), Serial0/0/0
+P 192.168.40.0/24, 1 successors, FD is 2816
+         via Connected, GigabitEthernet0/0
+R3#
+R3#do wr
+      ^
+% Invalid input detected at '^' marker.
+	
+R3#
+
+R4:
+R4\>
+R4\>en
+R4\#config t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R4\(config)#hos
+R4\(config)#hostname R4
+R4(config)#ro
+R4(config)#router ei
+R4(config)#router eigrp 100
+R4(config-router)#net 192.168.3.0 0.0.0.255
+R4(config-router)#
+%DUAL-5-NBRCHANGE: IP-EIGRP 100: Neighbor 192.168.3.1 (Serial0/0/0) is up: new adjacency
+
+R4(config-router)#net 192.168.4.0 0.0.0.255
+R4(config-router)#
+%DUAL-5-NBRCHANGE: IP-EIGRP 100: Neighbor 192.168.4.2 (Serial0/0/1) is up: new adjacency
+
+R4(config-router)#net 192.168.50.0 0.0.0.255
+R4(config-router)#ex
+R4(config)#ex
+R4#
+%SYS-5-CONFIG_I: Configured from console by console
+
+R4#sh
+R4#show ip ei
+R4#show ip eigrp ne
+R4#show ip eigrp neighbors 
+IP-EIGRP neighbors for process 100
+H   Address         Interface      Hold Uptime    SRTT   RTO   Q   Seq
+                                   (sec)          (ms)        Cnt  Num
+0   192.168.3.1     Se0/0/0        11   00:00:37  40     1000  0   20
+1   192.168.4.2     Se0/0/1        11   00:00:21  40     1000  0   14
+
+R4#
+R4#sho
+R4#show ip ro
+R4#show ip route ei
+R4#show ip route eigrp 
+D    192.168.1.0/24 [90/2681856] via 192.168.4.2, 00:00:28, Serial0/0/1
+D    192.168.2.0/24 [90/2681856] via 192.168.3.1, 00:00:44, Serial0/0/0
+     192.168.4.0/24 is variably subnetted, 2 subnets, 2 masks
+D    192.168.10.0/24 [90/2172416] via 192.168.4.2, 00:00:28, Serial0/0/1
+D    192.168.20.0/24 [90/2172416] via 192.168.4.2, 00:00:28, Serial0/0/1
+D    192.168.30.0/24 [90/2682112] via 192.168.3.1, 00:00:44, Serial0/0/0
+                     [90/2682112] via 192.168.4.2, 00:00:28, Serial0/0/1
+D    192.168.40.0/24 [90/2170112] via 192.168.3.1, 00:00:44, Serial0/0/0
+
+R4#
+R4#
+R4#show ip ei
+R4#show ip eigrp to
+R4#show ip eigrp topology al
+R4#show ip eigrp topology all-links 
+IP-EIGRP Topology Table for AS 100/ID(192.168.50.1)
+
+Codes: P - Passive, A - Active, U - Update, Q - Query, R - Reply,
+       r - Reply status
+
+P 192.168.1.0/24, 1 successors, FD is 2681856
+         via 192.168.4.2 (2681856/2169856), Serial0/0/1
+P 192.168.2.0/24, 1 successors, FD is 2681856
+         via 192.168.3.1 (2681856/2169856), Serial0/0/0
+P 192.168.3.0/24, 1 successors, FD is 2169856
+         via Connected, Serial0/0/0
+P 192.168.4.0/24, 1 successors, FD is 2169856
+         via Connected, Serial0/0/1
+P 192.168.10.0/24, 1 successors, FD is 2172416
+         via 192.168.4.2 (2172416/28160), Serial0/0/1
+P 192.168.20.0/24, 1 successors, FD is 2172416
+         via 192.168.4.2 (2172416/28160), Serial0/0/1
+P 192.168.30.0/24, 2 successors, FD is 2682112
+         via 192.168.3.1 (2682112/2170112), Serial0/0/0
+         via 192.168.4.2 (2682112/2170112), Serial0/0/1
+P 192.168.40.0/24, 1 successors, FD is 2170112
+         via 192.168.3.1 (2170112/2816), Serial0/0/0
+P 192.168.50.0/24, 1 successors, FD is 2816
+         via Connected, GigabitEthernet0/0
+R4#
+R4#
+
