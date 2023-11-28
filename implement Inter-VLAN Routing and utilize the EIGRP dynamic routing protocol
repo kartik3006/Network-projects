@@ -1,7 +1,0 @@
-The goal is to create multiple VLANs on switches and enable communication between these VLANs using Inter-VLAN Routing. Additionally, we want to implement the EIGRP (Enhanced Interior Gateway Routing Protocol) routing protocol for dynamic routing between the VLANs.
-
-Topology:
-Devices:
-Router: Connects to switches.
-Switch1: VLAN 10 (192.168.10.0/24)
-Switch2: VLAN 20 (192.168.20.0/24)
